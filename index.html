@@ -127,6 +127,64 @@ main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:1100p
 .rfoot .btn{background:rgba(255,255,255,.12);color:#fff}.rfoot .btn.pri{background:var(--accent)}
 .tg{font-size:13px;font-weight:600;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;white-space:nowrap}
 .tg[aria-pressed="true"]{background:var(--accent)}
+
+/* thanh dưới bo tròn kiểu iPhone */
+.nav{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:6px 6px;border:1px solid var(--line);border-radius:28px;background:color-mix(in srgb,var(--surface) 82%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 8px 28px rgba(0,0,0,.28)}
+.nav button{border-radius:22px}
+.nav button[aria-current="page"]{background:var(--surface2)}
+main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
+
+/* ---------- máy tính bảng (iPad) ---------- */
+@media (min-width:768px){
+  body{font-size:16px}
+  main{max-width:1240px}
+  .g{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+  .brand{padding-block:18px 14px}
+  .brand svg{width:40px;height:40px}
+  .brand b{font-size:28px}
+  .grid{gap:26px 18px}
+  .card .t{font-size:16px}
+  .card .s{font-size:14px}
+  .sec h3{font-size:26px}
+  .sbar input{height:52px}
+  .sel,.lang{font-size:15px;padding:10px 16px}
+  .chip{font-size:14.5px;padding:8px 16px}
+  .tile{font-size:19px;padding:16px}
+  .list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .hmain{grid-template-columns:76px minmax(0,1fr)}
+  .nav{left:50%;right:auto;transform:translateX(-50%);width:min(640px,calc(100% - 48px));bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:8px}
+  .nav button{font-size:12.5px;padding:8px 0}
+  .nav svg{width:27px;height:27px}
+  main{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
+  .ov>.g{max-width:1240px;margin-inline:auto}
+  .ovbar.g{padding-inline:max(28px,calc((100% - 1184px)/2))}
+  .ovbar h2{font-size:19px}
+  .ib{width:44px;height:44px}
+  .dhead{grid-template-columns:220px minmax(0,1fr);gap:28px;padding-top:18px}
+  .dhead h1{font-size:34px}
+  .by{font-size:16px}
+  .tags span{font-size:13.5px;padding:4px 12px}
+  .btns{max-width:460px}
+  .desc{font-size:16px;-webkit-line-clamp:8;max-width:80ch}
+  .chl{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .ch{padding:15px 16px}
+  .pages,.rfoot{max-width:860px}
+  .form{max-width:520px}
+  .panel{max-width:640px}
+  .themebtn{max-width:640px}
+  .note{max-width:70ch}
+  .banner{max-width:860px;margin-inline:auto}
+}
+@media (min-width:1000px){
+  .grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+  .list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .chl{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (hover:hover){
+  .card:hover .thumb img,.tile:hover{filter:brightness(1.08)}
+  .ch:hover,.hrow:hover{background:var(--surface2)}
+}
 </style>
 </head>
 <body>
