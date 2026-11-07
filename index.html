@@ -251,6 +251,17 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
 .ov:not(.rd){padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 @media (min-width:768px) and (orientation:portrait){.ov:not(.rd){padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}}
 @media (min-width:768px) and (orientation:landscape){.ov:not(.rd){padding-right:112px;padding-bottom:0}}
+
+/* iPad ngang: thanh bên nhỏ gọn, chỉ có biểu tượng */
+@media (min-width:768px) and (orientation:landscape){
+  .nav{top:calc(50vh - 131px);top:calc(50svh - 131px);width:60px;padding:8px;gap:6px;border-radius:30px;box-shadow:0 6px 24px rgba(0,0,0,.28)}
+  .nav button{width:44px;height:44px;padding:0;border-radius:50%;justify-content:center;margin:0 auto}
+  .nav button span{display:none}
+  .nav svg{width:24px;height:24px}
+  .nav button[aria-current="page"]{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
+  main{width:calc(100% - 92px)}
+  .ov:not(.rd){padding-right:92px}
+}
 </style>
 </head>
 <body>
@@ -494,7 +505,7 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   var tab='home',token=0,libTab='fav',authView=0;
   var TABS=[['home','Trang chủ','home'],['genres','Thể loại','grid'],['search','Tìm kiếm','search'],['library','Thư viện','heart'],['me','Tôi','user']];
   function setNav(){
-    navEl.innerHTML=TABS.map(function(n){return '<button data-go="'+n[0]+'"'+(n[0]===tab?' aria-current="page"':'')+'>'+ic(n[2])+n[1]+'</button>'}).join('');
+    navEl.innerHTML=TABS.map(function(n){return '<button data-go="'+n[0]+'"'+(n[0]===tab?' aria-current="page"':'')+' aria-label="'+n[1]+'" title="'+n[1]+'">'+ic(n[2])+'<span>'+n[1]+'</span></button>'}).join('');
   }
   var SECTIONS=[['Theo dõi nhiều nhất',{'order[followedCount]':'desc'}],['Mới cập nhật',{'order[latestUploadedChapter]':'desc'}],['Mới thêm',{'order[createdAt]':'desc'}]];
   function vHome(){
