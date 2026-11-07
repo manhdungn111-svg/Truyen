@@ -234,6 +234,9 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   #rd.rtl .rarrow.pv svg{transform:rotate(180deg)}
   #rd.rtl .rarrow.nx svg{transform:none}
 }
+
+.rd.noui .rbot{opacity:0;pointer-events:none;transform:translateY(24px)}
+.rbot{transition:opacity .2s,transform .2s}
 </style>
 </head>
 <body>
@@ -266,7 +269,7 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   function drop(k){try{localStorage.removeItem(k)}catch(e){}}
 
   var lang=load('qt-lang','vi'),saver=load('qt-saver',false),progress=load('qt-prog',{});
-  var spread=load('qt-spread',null),rtl=load('qt-rtl',false);
+  var rdHide=true,spread=load('qt-spread',null),rtl=load('qt-rtl',false);
   function spreadOn(){return spread===null?innerWidth>=900:!!spread}
   langSel.value=lang;
 
@@ -420,7 +423,7 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   function pageUrl(d){return VIA?BASE+'/proxy?u='+encodeURIComponent(d):d}
   function showBanner(){var b=$('#rbanner');if(b)b.hidden=false}
   document.addEventListener('load',function(e){var t=e.target;if(!t||t.tagName!=='IMG'||!t.classList.contains('rimg'))return;var r=t.naturalHeight/t.naturalWidth;t.classList.toggle('long',r>2.2);t.classList.toggle('span',r<0.9)},true);
-  document.addEventListener('click',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('rimg')){var r=$('#rd');if(r)r.classList.toggle('noui')}});
+  document.addEventListener('click',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('rimg')){var r=$('#rd');if(r){r.classList.toggle('noui');rdHide=r.classList.contains('noui')}}});
   document.addEventListener('error',function(e){
     var t=e.target;if(!t||t.tagName!=='IMG')return;
     var list=(t.dataset.alt||'').split(' ').filter(Boolean);
@@ -683,7 +686,7 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
       var p=progress[mid]||{read:{}};p.chapter=cid;p.read=p.read||{};p.read[cid]=1;progress[mid]=p;save('qt-prog',progress);
       addHist(c.m,cid,chLabel(ch));
       var prev=idx>0?c.chapters[idx-1]:null,next=idx<c.chapters.length-1?c.chapters[idx+1]:null;
-      var o='<div class="ov rd'+(rtl?' rtl':'')+'" id="rd" role="dialog">'+bar(c.m.title+' · '+chLabel(ch),'<button class="tg padonly" data-spread aria-pressed="'+spreadOn()+'">2 trang</button><button class="tg padonly" data-rtl aria-pressed="'+(!!rtl)+'">Phải sang trái</button><button class="tg" data-saver aria-pressed="'+(!!saver)+'">Tiết kiệm dữ liệu</button>')+'<div class="banner" id="rbanner" hidden>Ảnh chưa tải được. Vào tab Tôi, bấm Kiểm tra kết nối để biết lỗi ở đâu.</div><div class="pages'+(spreadOn()?' two':'')+(rtl?' rtl':'')+'" id="pages">';
+      var o='<div class="ov rd'+(rtl?' rtl':'')+(rdHide?' noui':'')+'" id="rd" role="dialog">'+bar(c.m.title+' · '+chLabel(ch),'<button class="tg padonly" data-spread aria-pressed="'+spreadOn()+'">2 trang</button><button class="tg padonly" data-rtl aria-pressed="'+(!!rtl)+'">Phải sang trái</button><button class="tg" data-saver aria-pressed="'+(!!saver)+'">Tiết kiệm dữ liệu</button>')+'<div class="banner" id="rbanner" hidden>Ảnh chưa tải được. Vào tab Tôi, bấm Kiểm tra kết nối để biết lỗi ở đâu.</div><div class="pages'+(spreadOn()?' two':'')+(rtl?' rtl':'')+'" id="pages">';
       files.forEach(function(f,i){var d=at.baseUrl+'/'+mode+'/'+at.chapter.hash+'/'+f;o+='<img class="rimg" src="'+esc(pageUrl(d))+'" data-alt="'+esc(pageAlts(d))+'" alt="Trang '+(i+1)+'" loading="lazy" referrerpolicy="no-referrer">'});
       o+='</div><div class="rfoot g"><button class="btn" '+(prev?'data-read="'+esc(mid)+'|'+esc(prev.id)+'"':'disabled')+'>Chương trước</button><button class="btn pri" '+(next?'data-read="'+esc(mid)+'|'+esc(next.id)+'"':'disabled')+'>Chương sau</button></div></div>';
       var nb=function(x,cls,lab){return '<button class="ib '+cls+'" aria-label="'+lab+'" '+(x?'data-read="'+esc(mid)+'|'+esc(x.id)+'"':'disabled')+'>'+ic('back')+'</button>'};
