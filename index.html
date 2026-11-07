@@ -152,7 +152,7 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   .tile{font-size:19px;padding:16px}
   .list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
   .hmain{grid-template-columns:76px minmax(0,1fr)}
-  .nav{left:auto;right:max(14px,env(safe-area-inset-right,0px));top:50%;bottom:auto;transform:translateY(-50%);width:88px;grid-template-columns:1fr;gap:6px;padding:10px 6px;border-radius:30px}
+  .nav{left:auto;right:max(14px,env(safe-area-inset-right,0px));top:calc(50vh - 202px);top:calc(50svh - 202px);bottom:auto;transform:translateZ(0);width:88px;grid-template-columns:1fr;gap:6px;padding:10px 6px;border-radius:30px}
   .nav button{font-size:12px;padding:12px 0}
   .nav svg{width:27px;height:27px}
   main{width:calc(100% - 112px);margin-inline:0 auto;padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
@@ -237,6 +237,20 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
 
 .rd.noui .rbot{opacity:0;pointer-events:none;transform:translateY(24px)}
 .rbot{transition:opacity .2s,transform .2s}
+
+/* iPad xoay dọc: thanh điều hướng xuống giữa phía dưới */
+@media (min-width:768px) and (orientation:portrait){
+  .nav{left:50%;right:auto;top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(640px,calc(100% - 48px));grid-template-columns:repeat(5,1fr);gap:0;padding:8px;border-radius:28px}
+  .nav button{padding:8px 0;font-size:12.5px}
+  main{width:100%;margin-inline:auto;padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
+}
+
+/* thanh điều hướng giữ nguyên một chỗ, hiện ở mọi mục trừ trình đọc */
+.nav{z-index:45}
+.ov.rd{z-index:60}
+.ov:not(.rd){padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+@media (min-width:768px) and (orientation:portrait){.ov:not(.rd){padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}}
+@media (min-width:768px) and (orientation:landscape){.ov:not(.rd){padding-right:112px;padding-bottom:0}}
 </style>
 </head>
 <body>
