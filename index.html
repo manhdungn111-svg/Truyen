@@ -262,6 +262,16 @@ main{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))}
   main{width:calc(100% - 92px)}
   .ov:not(.rd){padding-right:92px}
 }
+
+/* iPad dọc: thanh dưới nhỏ gọn, chỉ có biểu tượng */
+@media (min-width:768px) and (orientation:portrait){
+  .nav{width:auto;grid-template-columns:repeat(5,44px);gap:6px;padding:8px;border-radius:30px;bottom:calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 6px 24px rgba(0,0,0,.28)}
+  .nav button{width:44px;height:44px;padding:0;border-radius:50%;justify-content:center}
+  .nav button span{display:none}
+  .nav svg{width:24px;height:24px}
+  .nav button[aria-current="page"]{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
+  main{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+}
 </style>
 </head>
 <body>
